@@ -1,0 +1,2 @@
+2018-11-21 21:26:40.445 +01:00 [INF] Starting web host
+2018-11-21 21:26:47.842 +01:00 [WRN] Failed to determine the https port for redirect.
