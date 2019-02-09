@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserClient, User } from 'src/app/Core/Services/api.service';
+import { TemperatureReadingClient, TemperatureReading } from 'src/app/Core/Services/api.service';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +7,9 @@ import { UserClient, User } from 'src/app/Core/Services/api.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  public users: User[];
+  public users: TemperatureReading[];
 
-  constructor(private userService: UserClient) {
+  constructor(private userService: TemperatureReadingClient) {
 
   }
   title = 'ClientApp';

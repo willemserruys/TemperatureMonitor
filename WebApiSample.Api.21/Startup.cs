@@ -28,6 +28,9 @@ namespace HourRegistration.API
             services.AddScoped<UserRepository>();
             services.AddDbContext<UserContext>();
 
+            services.AddScoped<TemperatureReadingRepository>();
+            services.AddDbContext<TemperatureReadingContext>();
+
             // Configure CORS
             services.AddCors(corsOptions => corsOptions.AddPolicy(
                 "Default",
