@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { TemperatureReadingClient, TemperatureReading } from 'src/app/Core/Services/api.service';
+
 
 @Component({
   selector: 'app-root',
