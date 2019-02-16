@@ -9,7 +9,7 @@ import {
 
 @NgModule({
     providers: [
-        { provide: API_BASE_URL, useValue: 'http://localhost:32586' }
+        { provide: API_BASE_URL, useValue: 'http://192.168.0.221:32588' }
     ]
 })
 export class ServicesModule {

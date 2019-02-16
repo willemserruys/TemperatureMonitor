@@ -8,7 +8,7 @@ namespace HourRegistration.DataAccess.Models
         public int Id { get; set; }
 
         [Required]
-        public int Value { get; set; }
+        public decimal Value { get; set; }
 
         [Required]
         public string TimeStamp { get; set; }
