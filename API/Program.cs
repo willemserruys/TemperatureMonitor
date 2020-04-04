@@ -42,6 +42,10 @@ namespace API
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    if (args.Length == 1)
+                    {
+                        webBuilder.UseUrls(args[0]);
+                    }
                 });
     }
 }
