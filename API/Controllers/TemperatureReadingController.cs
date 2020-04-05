@@ -13,12 +13,10 @@ namespace API.Controllers
     [Route("[controller]")]
     public class TemperatureReadingController : ControllerBase
     {
-        private readonly ILogger<TemperatureReadingController> _logger;
         private readonly IRepository _repository;
 
-        public TemperatureReadingController(ILogger<TemperatureReadingController> logger, IRepository repository)
+        public TemperatureReadingController(IRepository repository)
         {
-            _logger = logger;
             _repository = repository;
         }
 
