@@ -1,4 +1,7 @@
-﻿@{
+﻿@using System.Net.Http
+@using System.Net
+@inject IHttpClientFactory httpClientFactory
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,3 +9,36 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+
+@{
+    string result = string.Empty;
+    try
+    {
+        // Get client from httpClient factory
+        var client = httpClientFactory.CreateClient(name: "TemperatureMonitor");
+
+        // Create request
+        var request = new HttpRequestMessage(method: HttpMethod.Get, requestUri: "/TemperatureReading");
+
+        // Send the request and wait for response
+        HttpResponseMessage response = await client.SendAsync(request);  
+ 
+        if(response.StatusCode == HttpStatusCode.OK)
+        {
+            // Read the response string if request was succesful
+            result = await response.Content.ReadAsStringAsync();
+        }
+    }
+    catch (System.Exception)
+    {
+        // TODO: add some additional logging for when things fail
+    }    
+
+    if (!string.IsNullOrEmpty(result))
+    {
+        // Display the string if it was returned from the API
+        <h6 class="small">@result</h6>
+    }
+}
+
