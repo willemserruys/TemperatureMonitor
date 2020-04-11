@@ -1,15 +1,11 @@
 ﻿@using System.Net.Http
 @using System.Net
+@using static System.Console
+
 @inject IHttpClientFactory httpClientFactory
 @{
     ViewData["Title"] = "Home Page";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
-
 
 @{
     string result = string.Empty;
@@ -30,9 +26,10 @@
             result = await response.Content.ReadAsStringAsync();
         }
     }
-    catch (System.Exception)
+    catch (System.Exception e)
     {
-        // TODO: add some additional logging for when things fail
+        WriteLine(e.Message);
+        WriteLine(e.StackTrace);
     }    
 
     if (!string.IsNullOrEmpty(result))
@@ -41,4 +38,9 @@
         <h6 class="small">@result</h6>
     }
 }
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
 
