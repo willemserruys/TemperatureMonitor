@@ -21,10 +21,10 @@ namespace FrontEnd
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseUrls(
-                    "http://localhost:5000",
-                    "https://localhost:5002"
-                    );
+                    if (args.Length == 1)
+                    {
+                        webBuilder.UseUrls(args[0]);
+                    }
                 });
     }
 }
