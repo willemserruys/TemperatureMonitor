@@ -33,11 +33,11 @@ namespace API
             services.AddCors();
             services.AddControllers();
             services.AddSignalR();
-            services.AddHostedService<TemperatureReadingHostedService>();
 
             services.AddDbContext<DataContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("Default")));
             services.AddTransient<IRepository, Repository>();
+            services.AddHostedService<TemperatureReadingHostedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
