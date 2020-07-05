@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.HostedServices;
+using API.Hubs;
 using API.Infrastructure;
 using API.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -30,10 +32,12 @@ namespace API
         {
             services.AddCors();
             services.AddControllers();
+            services.AddSignalR();
+            services.AddHostedService<TemperatureReadingHostedService>();
 
-            services.AddDbContext<DataContext>(options => 
+            services.AddDbContext<DataContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("Default")));
-            services.AddTransient<IRepository,Repository>();
+            services.AddTransient<IRepository, Repository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,10 +58,10 @@ namespace API
             {
                 options.WithMethods("GET");
             });
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<TemperatureReadingHub>(Configuration["SignalR:Slug"]);
             });
         }
     }
