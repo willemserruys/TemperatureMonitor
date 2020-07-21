@@ -24,14 +24,15 @@ namespace FrontEnd
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddControllersWithViews();
             services.AddHttpClient(name: "TemperatureMonitor",
             configureClient: options =>
             {
-            options.BaseAddress = new Uri("https://localhost:5001");
-            options.DefaultRequestHeaders.Accept.Add(
-            new MediaTypeWithQualityHeaderValue(
-            "application/json", 1.0));
+                options.BaseAddress = new Uri("http://localhost:5000");
+                options.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue(
+                "application/json", 1.0));
             });
         }
 
@@ -48,7 +49,11 @@ namespace FrontEnd
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseHttpsRedirection();
+
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+            });
             app.UseStaticFiles();
 
             app.UseRouting();

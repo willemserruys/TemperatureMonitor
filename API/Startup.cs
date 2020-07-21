@@ -54,9 +54,9 @@ namespace API
 
             app.UseAuthorization();
 
-            app.UseCors(configurePolicy: options =>
+            app.UseCors(builder =>
             {
-                options.WithMethods("GET");
+                builder.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:8000");
             });
             app.UseEndpoints(endpoints =>
             {
